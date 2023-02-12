@@ -1,0 +1,5 @@
+steps:
+- name: bash
+  script: |
+    #!/usr/bin/env bash
+    echo "First Job"
