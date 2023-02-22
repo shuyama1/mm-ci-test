@@ -3,3 +3,6 @@ steps:
   script: |
     #!/usr/bin/env bash
     echo "Second Job"
+    echo $BRANCH_NAME
+    echo $COMMIT_SHA
+    echo $_VAR_1
