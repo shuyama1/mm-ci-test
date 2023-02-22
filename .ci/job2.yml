@@ -6,3 +6,6 @@ steps:
     echo $BRANCH_NAME
     echo $COMMIT_SHA
     echo $_VAR_1
+    echo $_BUILD_STATUS
+    echo $_BUILD_TRIGGER_ID
+    echo "Done"
