@@ -9,7 +9,3 @@ steps:
     echo $_BUILD_STATUS
     echo $_BUILD_TRIGGER_ID
     echo "Done"
-  args:
-    - $_VAR_1
-    - $_BUILD_STATUS
-    - $_BUILD_TRIGGER_ID
