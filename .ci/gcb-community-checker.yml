@@ -1,0 +1,19 @@
+---
+steps:
+    - name: 'gcr.io/shuya-terraform-test/membership_checker'
+      id: community-checker
+      secretEnv: ["GITHUB_TOKEN", "PRESUBMIT_TRIGGER", "RAKE_TESTS_TRIGGER"]
+      timeout: 8000s
+      args:
+          - "check_community_contributor"
+          - $_PR_NUMBER
+          - $COMMIT_SHA
+
+availableSecrets:
+  secretManager:
+    - versionName: projects/53725150431/secrets/shuyama1_github_token/versions/latest
+      env: GITHUB_TOKEN
+    - versionName: projects/53725150431/secrets/ci-presubmit-trigger/versions/latest
+      env: PRESUBMIT_TRIGGER
+    - versionName: projects/53725150431/secrets/ci-rake-test-trigger/versions/latest
+      env: RAKE_TESTS_TRIGGER
