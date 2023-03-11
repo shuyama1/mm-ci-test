@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-func reviewerAssignment (author, prNumber, GITHUB_TOKEN string) error {
+func reviewerAssignment(author, prNumber, GITHUB_TOKEN string) error {
 	if isNoAssigneeUser(author) {
 		fmt.Println("User is on the list, not assigning")
 		return nil
@@ -21,7 +21,7 @@ func reviewerAssignment (author, prNumber, GITHUB_TOKEN string) error {
 		return err
 	}
 
-	if requestedReviewer != ""{
+	if requestedReviewer != "" {
 		fmt.Println("Issue is assigned")
 		if previousAssignedReviewers != nil {
 			fmt.Println("Retrieving previous reviewers to re-request reviews")
@@ -43,7 +43,7 @@ func reviewerAssignment (author, prNumber, GITHUB_TOKEN string) error {
 				foundTeamReviewer = true
 				err = assignPullRequestReviewer(prNumber, reviewer, GITHUB_TOKEN)
 				if err != nil {
-					 return err
+					return err
 				}
 			}
 		}
@@ -51,11 +51,10 @@ func reviewerAssignment (author, prNumber, GITHUB_TOKEN string) error {
 		if !foundTeamReviewer {
 			err = assignRandomReviewer(prNumber, GITHUB_TOKEN)
 			if err != nil {
-				 return err
+				return err
 			}
 		}
 	}
-
 
 	return nil
 }
@@ -70,7 +69,7 @@ func getPullRequestAuthor(prNumber, GITHUB_TOKEN string) (string, error) {
 	}
 
 	_, err := requestCall(url, "GET", GITHUB_TOKEN, &pullRequest, nil)
-	if err != nil{
+	if err != nil {
 		return "", err
 	}
 
@@ -87,8 +86,12 @@ func getPullRequestRequestedReviewer(prNumber, GITHUB_TOKEN string) (string, err
 	}
 
 	_, err := requestCall(url, "GET", GITHUB_TOKEN, &requestedReviewers, nil)
-	if err != nil{
+	if err != nil {
 		return "", err
+	}
+
+	if requestedReviewers == nil {
+		return "", ""
 	}
 
 	return requestedReviewers.Users[0].Login, nil
@@ -104,35 +107,33 @@ func getPullRequestPreviousAssignedReviewers(prNumber, GITHUB_TOKEN string) ([]s
 	}
 
 	_, err := requestCall(url, "GET", GITHUB_TOKEN, &reviews, nil)
-	if err != nil{
+	if err != nil {
 		return nil, err
 	}
 
 	previousAssignedReviewers := map[string]struct{}{}
-	for _, review := range reviews{
+	for _, review := range reviews {
 		previousAssignedReviewers[review.User.Login] = struct{}{}
 	}
 
-
 	result := []string{}
-	for key, _ := range previousAssignedReviewers{
+	for key, _ := range previousAssignedReviewers {
 		result = append(result, key)
 	}
 
 	return result, nil
 }
 
-
 func assignPullRequestReviewer(prNumber, assignee, GITHUB_TOKEN string) error {
 	url := fmt.Sprintf("https://api.github.com/repos/shuyama1/mm-ci-test/pulls/%s/requested_reviewers", prNumber)
 
 	body := map[string][]string{
-		"reviewers": []string{assignee},
+		"reviewers":      []string{assignee},
 		"team_reviewers": []string{},
 	}
 
 	reqStatusCode, err := requestCall(url, "POST", GITHUB_TOKEN, nil, body)
-	if err != nil{
+	if err != nil {
 		return err
 	}
 
@@ -148,11 +149,11 @@ func assignPullRequestReviewer(prNumber, assignee, GITHUB_TOKEN string) error {
 func assignRandomReviewer(prNumber, GITHUB_TOKEN string) error {
 	assignee := getRamdomReviewer()
 	err := assignPullRequestReviewer(prNumber, assignee, GITHUB_TOKEN)
-	if err != nil{
+	if err != nil {
 		return err
 	}
 	err = postComment(prNumber, assignee, GITHUB_TOKEN)
-	if err != nil{
+	if err != nil {
 		return err
 	}
 	return nil
@@ -186,9 +187,9 @@ If your reviewer doesn't get back to you within a week after your most recent ch
 	body := map[string]string{
 		"body": comment,
 	}
-	
+
 	reqStatusCode, err := requestCall(url, "POST", GITHUB_TOKEN, nil, body)
-	if err != nil{
+	if err != nil {
 		return err
 	}
 
