@@ -8,6 +8,8 @@ RUN go mod download
 
 COPY *.go ./
 
-RUN go build
+RUN go build -o /membership_checker
 
-ENTRYPOINT ["/tmp/membership_checker"]
+EXPOSE 8080
+
+ENTRYPOINT [ "/membership_checker" ]
