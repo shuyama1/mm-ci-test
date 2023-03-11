@@ -90,7 +90,7 @@ func getPullRequestRequestedReviewer(prNumber, GITHUB_TOKEN string) (string, err
 		return "", err
 	}
 
-	if requestedReviewers == nil {
+	if requestedReviewers.Users == nil {
 		return "", nil
 	}
 
