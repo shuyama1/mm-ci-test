@@ -1,16 +1,8 @@
-# syntax=docker/dockerfile:1
+FROM golang:1.18-alpine
 
-FROM golang:1.16-alpine
+WORKDIR /src
+COPY . ./
 
-WORKDIR /app
+RUN go build
 
-COPY go.mod ./
-COPY go.sum ./
-RUN go mod download
-
-COPY *.go ./
-RUN go build -o /membership_checker
-
-EXPOSE 8080
-
-ENTRYPOINT [ "/membership_checker" ]
+ENTRYPOINT [ "/src/membership_checker" ]
