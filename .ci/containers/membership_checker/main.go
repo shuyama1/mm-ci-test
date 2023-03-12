@@ -31,7 +31,7 @@ func main() {
 		return
 	}
 
-	if target == "auto_run_tests" {
+	if target == "check_auto_run_contributor" {
 		err = reviewerAssignment(author, prNumber, GITHUB_TOKEN)
 		if err != nil {
 			fmt.Println(err)
@@ -41,7 +41,7 @@ func main() {
 
 	trusted := isTrustedUser(author, GITHUB_TOKEN)
 
-	if (target == "auto_run_tests" && trusted) || (target == "check_community_contributor" && !trusted) {
+	if (target == "check_auto_run_contributor" && trusted) || (target == "check_community_contributor" && !trusted) {
 		err = triggerMMPresubmitRuns("shuya-terraform-test", "mm-ci-test", commitSha)
 		if err != nil {
 			fmt.Println(err)

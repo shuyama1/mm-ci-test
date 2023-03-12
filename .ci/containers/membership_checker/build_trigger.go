@@ -41,7 +41,7 @@ func triggerCloudBuildRun(projectId, triggerId, repoName, commitSha string) erro
 
 	repoSource := &cloudbuild.RepoSource{
 		ProjectId: projectId,
-		RepoName: repoName,
+		RepoName:  repoName,
 		CommitSha: commitSha,
 	}
 
@@ -50,7 +50,6 @@ func triggerCloudBuildRun(projectId, triggerId, repoName, commitSha string) erro
 		return fmt.Errorf("Failed to create Cloud Build run: %s", err)
 	}
 
-
-	fmt.Println("Started Cloud Build Run: ")
+	fmt.Println("Started Cloud Build Run: ", triggerId)
 	return nil
 }

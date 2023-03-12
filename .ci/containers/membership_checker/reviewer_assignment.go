@@ -27,7 +27,10 @@ func reviewerAssignment(author, prNumber, GITHUB_TOKEN string) error {
 			fmt.Println("Retrieving previous reviewers to re-request reviews")
 			for _, reviewer := range previousAssignedReviewers {
 				if isTeamReviewer(reviewer) {
-					assignPullRequestReviewer(prNumber, reviewer, GITHUB_TOKEN)
+					err = assignPullRequestReviewer(prNumber, reviewer, GITHUB_TOKEN)
+					if err != nil {
+						return err
+					}
 				}
 			}
 		}

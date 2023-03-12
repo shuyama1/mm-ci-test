@@ -14,7 +14,12 @@ var (
 	// reviewerRotationList = []string{"megan07", "slevenick", "c2thorn", "rileykarson", "melinath", "ScottSuarez", "shuyama1", "SarahFrench", "roaks3", "zli82016", "trodge", "hao-nan-li"}
 	reviewerRotationList = []string{"shuyama1"}
 
-	// This is where you add trusted users who do not need to '/gcbrun' comment to run tests
+	// This is where your add reviewers who will be re-requested reviews when PR authors make new commits
+	// This should mostly be identical to reviewerRotationList, but if someone is temporally removed from assignee list, they can still be on this list to keep getting review alert for current PRs
+	// rerequestReviewerRotationList = []string{"megan07", "slevenick", "c2thorn", "rileykarson", "melinath", "ScottSuarez", "shuyama1", "SarahFrench", "roaks3", "zli82016", "trodge", "hao-nan-li"}
+	rerequestReviewerRotationList = []string{"shuyama1"}
+
+	// This is where you add trusted users (besides the users who are already in noAssigneeList) that do not need a '/gcbrun' comment from team to run tests
 	trustedMemberList = []string{}
 )
 
@@ -23,7 +28,7 @@ func isNoAssigneeUser(author string) bool {
 }
 
 func isTeamReviewer(reviewer string) bool {
-	return onList(reviewer, reviewerRotationList)
+	return onList(reviewer, rerequestReviewerRotationList)
 }
 
 // Check if a user is safe to run tests automatically
@@ -33,12 +38,12 @@ func isTrustedUser(author, GITHUB_TOKEN string) bool {
 		return true
 	}
 
-	if isOrgMember(author, "GoogleCloudPlatform", GITHUB_TOKEN){
+	if isOrgMember(author, "GoogleCloudPlatform", GITHUB_TOKEN) {
 		fmt.Println("User is a GCP org member")
 		return true
 	}
 
-	if isOrgMember(author, "googlers", GITHUB_TOKEN){
+	if isOrgMember(author, "googlers", GITHUB_TOKEN) {
 		fmt.Println("User is a googlers org member")
 		return true
 	}
@@ -47,20 +52,18 @@ func isTrustedUser(author, GITHUB_TOKEN string) bool {
 }
 
 func isTrustedMember(author string) bool {
-	return onList(author, trustedMemberList)
+	return onList(author, noAssigneeList) || onList(author, trustedMemberList)
 }
-
 
 func isOrgMember(author, org, GITHUB_TOKEN string) bool {
 	url := fmt.Sprintf("https://api.github.com/orgs/%s/members/%s", org, author)
 	res, _ := requestCall(url, "GET", GITHUB_TOKEN, nil, nil)
 
-	return res!=404
+	return res != 404
 }
 
-func getRamdomReviewer() string{
+func getRamdomReviewer() string {
 	assignee := reviewerRotationList[rand.Intn(len(reviewerRotationList))]
-    rand.Seed(time.Now().Unix())
-    return assignee
+	rand.Seed(time.Now().Unix())
+	return assignee
 }
-
