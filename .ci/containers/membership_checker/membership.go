@@ -20,7 +20,7 @@ var (
 	rerequestReviewerRotationList = []string{"shuyama1"}
 
 	// This is where you add trusted users (besides the users who are already in noAssigneeList) that do not need a '/gcbrun' comment from team to run tests
-	trustedMemberList = []string{}
+	trustedMemberList = []string{"nobody"}
 )
 
 func isNoAssigneeUser(author string) bool {

@@ -141,7 +141,7 @@ func assignPullRequestReviewer(prNumber, assignee, GITHUB_TOKEN string) error {
 	}
 
 	if reqStatusCode != http.StatusCreated {
-		return fmt.Errorf("Error adding reviewer for PR %", prNumber)
+		return fmt.Errorf("Error adding reviewer for PR %s", prNumber)
 	}
 
 	fmt.Printf("Successfully added reviewer %s to pull request %s", assignee, prNumber)
@@ -197,7 +197,7 @@ If your reviewer doesn't get back to you within a week after your most recent ch
 	}
 
 	if reqStatusCode != http.StatusCreated {
-		return fmt.Errorf("Error posting reviewer assignment comment for PR %", prNumber)
+		return fmt.Errorf("Error posting reviewer assignment comment for PR %s", prNumber)
 	}
 
 	fmt.Printf("Successfully posted reviewer assignment comment to pull request %s", prNumber)
