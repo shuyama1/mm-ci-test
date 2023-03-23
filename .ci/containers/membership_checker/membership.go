@@ -12,7 +12,7 @@ var (
 
 	// This is where you add people to the random-assignee rotation.
 	// reviewerRotationList = []string{"megan07", "slevenick", "c2thorn", "rileykarson", "melinath", "ScottSuarez", "shuyama1", "SarahFrench", "roaks3", "zli82016", "trodge", "hao-nan-li"}
-	reviewerRotationList = []string{"shuyama1"}
+	reviewerRotationList = []string{"shuyama1", "nobody"}
 
 	// This is where your add reviewers who will be re-requested reviews when PR authors make new commits
 	// This should mostly be identical to reviewerRotationList, but if someone is temporally removed from assignee list, they can still be on this list to keep getting review alert for current PRs
