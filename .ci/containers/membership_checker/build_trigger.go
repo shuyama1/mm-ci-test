@@ -32,6 +32,20 @@ func triggerMMPresubmitRuns(projectId, repoName, commitSha, branchName string) e
 	return nil
 }
 
+func triggerMMCommunityCheckerRuns(projectId, repoName, commitSha, branchName string) error {
+	communityCheckerTriggerId, ok := os.LookupEnv("COMMUNITY_CHECKER_TRIGGER")
+	if !ok {
+		return fmt.Errorf("Did not provide COMMUNITY_CHECKER_TRIGGER environment variable")
+	}
+
+	err = triggerCloudBuildRun(projectId, communityCheckerTriggerId, repoName, commitSha, branchName)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func triggerCloudBuildRun(projectId, triggerId, repoName, commitSha, branchName string) error {
 	ctx := context.Background()
 	c, err := cloudbuild.NewService(ctx)

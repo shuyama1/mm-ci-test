@@ -51,6 +51,14 @@ func main() {
 			return
 		}
 	}
+
+	if (trusted){
+		err = triggerMMCommunityCheckerRuns("shuya-terraform-test", "mm-ci-test", commitSha, branchName)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+	}
 	// sha := "d0ddac3248d122412eb038cbe4d941be9be4eabd"
 	// url := fmt.Sprintf("https://api.github.com/repos/shuyama1/mm-ci-test/statuses/%s", sha)
 	// body := map[string]string{
