@@ -38,7 +38,7 @@ func triggerMMCommunityCheckerRuns(projectId, repoName, commitSha, branchName st
 		return fmt.Errorf("Did not provide COMMUNITY_CHECKER_TRIGGER environment variable")
 	}
 
-	err = triggerCloudBuildRun(projectId, communityCheckerTriggerId, repoName, commitSha, branchName)
+	err := triggerCloudBuildRun(projectId, communityCheckerTriggerId, repoName, commitSha, branchName)
 	if err != nil {
 		return err
 	}
