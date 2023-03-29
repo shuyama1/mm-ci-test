@@ -11,7 +11,7 @@ func main() {
 		fmt.Println("Did not provide GITHUB_TOKEN environment variable")
 		os.Exit(1)
 	}
-	GITHUB_TOKEN, ok := os.LookupEnv("COMMUNITY_CHECKER_TRIGGER")
+	COMMUNITY_CHECKER_TRIGGER, ok := os.LookupEnv("COMMUNITY_CHECKER_TRIGGER")
 	if !ok {
 		fmt.Println("Did not provide COMMUNITY_CHECKER_TRIGGER environment variable")
 		os.Exit(1)
