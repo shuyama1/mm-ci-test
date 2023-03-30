@@ -11,11 +11,6 @@ func main() {
 		fmt.Println("Did not provide GITHUB_TOKEN environment variable")
 		os.Exit(1)
 	}
-	COMMUNITY_CHECKER_TRIGGER, ok := os.LookupEnv("COMMUNITY_CHECKER_TRIGGER")
-	if !ok {
-		fmt.Println("Did not provide COMMUNITY_CHECKER_TRIGGER environment variable")
-		os.Exit(1)
-	}
 	if len(os.Args) <= 4 {
 		fmt.Println("Not enough arguments")
 		os.Exit(1)
