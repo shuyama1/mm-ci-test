@@ -28,6 +28,9 @@ func main() {
 	branchName := os.Args[4]
 	fmt.Println("Branch Name: ", branchName)
 
+	projectId := "shuya-terraform-test"
+	repoName := "mm-ci-test"
+
 	author, err := getPullRequestAuthor(prNumber, GITHUB_TOKEN)
 	if err != nil {
 		fmt.Println(err)
@@ -45,29 +48,29 @@ func main() {
 	trusted := isTrustedUser(author, GITHUB_TOKEN)
 
 	if (target == "check_auto_run_contributor" && trusted) || (target == "check_community_contributor" && !trusted) {
-		err = triggerMMPresubmitRuns("shuya-terraform-test", "mm-ci-test", commitSha, branchName)
+		err = triggerMMPresubmitRuns(projectId, repoName, commitSha, branchName)
 		if err != nil {
 			fmt.Println(err)
 			return
 		}
 	}
 
-	if (trusted){
-		err = triggerMMCommunityCheckerRuns("shuya-terraform-test", "mm-ci-test", commitSha, branchName)
-		if err != nil {
-			fmt.Println(err)
-			return
+	// in contributor-membership-checker job:
+	// auto approve community-checker run for trusted users
+	// add Awaiting Approval label to external contributor PRs
+	if target == "check_auto_run_contributor" {
+		if trusted {
+			approveCommunityChecker(prNumber, projectId, commitSha)
+		} else {
+			addAwaitingApprovalLabel(prNumber, GITHUB_TOKEN)
 		}
 	}
-	// sha := "d0ddac3248d122412eb038cbe4d941be9be4eabd"
-	// url := fmt.Sprintf("https://api.github.com/repos/shuyama1/mm-ci-test/statuses/%s", sha)
-	// body := map[string]string{
-	// 	"state":  "success",
-	// }
 
-	// _, err :=requestCall(url, "POST", GITHUB_TOKEN, nil, body)
-	// if err != nil {
-	// 	fmt.Println("error: ", err)
-	// }
-
+	// in community-checker job:
+	// remove Awaiting Approval label from external contributor PRs
+	if target == "check_community_contributor" && !trusted {
+		err = removeAwaitingApprovalLabel(prNumber, GITHUB_TOKEN)
+	}
 }
+
+

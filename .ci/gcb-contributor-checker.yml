@@ -2,7 +2,7 @@
 steps:
     - name: 'gcr.io/shuya-terraform-test/membership_checker'
       id: community-checker
-      secretEnv: ["GITHUB_TOKEN", "PRESUBMIT_TRIGGER", "RAKE_TESTS_TRIGGER"]
+      secretEnv: ["GITHUB_TOKEN", "PRESUBMIT_TRIGGER", "RAKE_TESTS_TRIGGER", "COMMUNITY_CHECKER_TRIGGER"]
       timeout: 8000s
       args:
           - "check_auto_run_contributor"
@@ -18,3 +18,5 @@ availableSecrets:
       env: PRESUBMIT_TRIGGER
     - versionName: projects/53725150431/secrets/ci-rake-test-trigger/versions/latest
       env: RAKE_TESTS_TRIGGER
+    - versionName: projects/53725150431/secrets/ci-community-checker-trigger/versions/latest
+      env: COMMUNITY_CHECKER_TRIGGER
