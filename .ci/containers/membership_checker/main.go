@@ -63,12 +63,13 @@ func main() {
 			approveCommunityChecker(prNumber, projectId, commitSha)
 		} else {
 			addAwaitingApprovalLabel(prNumber, GITHUB_TOKEN)
+			postAwaitingApprovalBuildLink(prNumber, GITHUB_TOKEN, projectId, commitSha)
 		}
 	}
 
 	// in community-checker job:
 	// remove Awaiting Approval label from external contributor PRs
-	if target == "check_community_contributor" && !trusted {
+	if target == "check_community_contributor" {
 		err = removeAwaitingApprovalLabel(prNumber, GITHUB_TOKEN)
 	}
 }
