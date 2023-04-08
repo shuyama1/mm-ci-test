@@ -39,7 +39,7 @@ func postAwaitingApprovalBuildLink(prNumber, GITHUB_TOKEN, projectId, commitSha 
 	targetUrl := fmt.Sprintf("https://console.cloud.google.com/cloud-build/builds;region=global/%s?project=%s", buildId, projectId)
 
 	postBody := map[string]string{
-		"context":    "APPROVE",
+		"context":    "APPROVE TO RUN TESTS",
 		"state":      "success",
 		"target_url": targetUrl,
 	}
