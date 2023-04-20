@@ -5,8 +5,12 @@ import (
 	"encoding/json"
 	"net/http"
 	"bytes"
-	"io/ioutil"
+	// "io/ioutil"
+	"embed"
 ) 
+
+//go:embed *
+var f embed.FS
 
 func onList(user string, userList []string) bool {
 	for _, v := range userList {
@@ -46,7 +50,7 @@ func requestCall(url, method, credentials string, result interface{}, body inter
 }
 
 func readFile(filename string) (string, error) {
-	contents, err := ioutil.ReadFile(filename)
+	contents, err := f.ReadFile(filename)
 	if err != nil {
 		return "", err
 	}
