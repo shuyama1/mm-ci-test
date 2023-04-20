@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"bytes"
+	"io/ioutil"
 ) 
 
 func onList(user string, userList []string) bool {
@@ -44,5 +45,11 @@ func requestCall(url, method, credentials string, result interface{}, body inter
 	return resp.StatusCode, nil
 }
 
-
+func readFile(filename string) (string, error) {
+	contents, err := ioutil.ReadFile(filename)
+	if err != nil {
+		return "", err
+	}
+	return string(contents), nil
+}
 

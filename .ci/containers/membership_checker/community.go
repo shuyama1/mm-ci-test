@@ -140,7 +140,9 @@ func addAwaitingApprovalLabel(prNumber, GITHUB_TOKEN string) error {
 
 func removeAwaitingApprovalLabel(prNumber, GITHUB_TOKEN string) error {
 	url := fmt.Sprintf("https://api.github.com/repos/shuyama1/mm-ci-test/issues/%s/labels/awaiting-approval", prNumber)
-	_, err := requestCall(url, "DELETE", GITHUB_TOKEN, nil, nil)
+	code, err := requestCall(url, "DELETE", GITHUB_TOKEN, nil, nil)
+
+	fmt.Println(code)
 
 	if err != nil {
 		return fmt.Errorf("Failed to remove awaiting approval label: %s", err)

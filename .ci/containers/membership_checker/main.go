@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"os"
+	// "os"
 )
 
 func main() {
@@ -70,8 +70,23 @@ func main() {
 	// in community-checker job:
 	// remove Awaiting Approval label from external contributor PRs
 	if target == "check_community_contributor" {
-		err = removeAwaitingApprovalLabel(prNumber, GITHUB_TOKEN)
+		removeAwaitingApprovalLabel(prNumber, GITHUB_TOKEN)
 	}
+
+	// prNumber := "29"
+	// err := removeAwaitingApprovalLabel(prNumber, GITHUB_TOKEN)
+	// if err != nil {
+	// 	fmt.Println(err)
+	// }
+
+	// comment, err := readFile("reviewer_assignment_comment.md")
+	// if err != nil {
+	// 	fmt.Println(err)
+	// 	return
+	// }
+	// fmt.Println(comment)
+
+
 }
 
 
