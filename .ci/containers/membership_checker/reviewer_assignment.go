@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"strings"
 )
 
 func reviewerAssignment(author, prNumber, GITHUB_TOKEN string) error {
