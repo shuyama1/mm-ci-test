@@ -167,7 +167,7 @@ func assignRandomReviewer(prNumber, GITHUB_TOKEN string) error {
 func postComment(prNumber, reviewer, GITHUB_TOKEN string) error {
 	url := fmt.Sprintf("https://api.github.com/repos/shuyama1/mm-ci-test/issues/%s/comments", prNumber)
 
-	comment, err := readFile(".ci/containers/membership_checker/REVIEWER_ASSIGNMENT_COMMENT.md")
+	comment, err := readFile("REVIEWER_ASSIGNMENT_COMMENT.md")
 	if err != nil {
 		return err
 	}
