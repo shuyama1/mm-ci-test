@@ -5,13 +5,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"bytes"
-	"embed"
 ) 
-
-var (
-    //go:embed *
-    embededFiles embed.FS
-)
 
 func onList(user string, userList []string) bool {
 	for _, v := range userList {
@@ -49,12 +43,3 @@ func requestCall(url, method, credentials string, result interface{}, body inter
 
 	return resp.StatusCode, nil
 }
-
-func readFile(filename string) (string, error) {
-	contents, err := embededFiles.ReadFile(filename)
-	if err != nil {
-		return "", err
-	}
-	return string(contents), nil
-}
-
