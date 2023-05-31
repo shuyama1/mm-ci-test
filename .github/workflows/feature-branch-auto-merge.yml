@@ -1,0 +1,32 @@
+name: Feature branch auto merge
+
+on:
+  workflow_dispatch:
+  schedule:
+    # You can setup schedule here
+    - cron: '0 0 * * *'
+
+env:
+
+  MY_REPO: https://shuyama1:${{secrets.GITHUB_TOKEN}}@github.com/shuyama1/mm-ci-test.git
+
+  MY_BRANCH: feature-branch-test-branch
+
+  MASTER_REPO: https://github.com/shuyama1/mm-ci-test.git
+
+  MAIN_BRANCH: main
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Merge with master
+      run: |
+        git clone ${{env.MY_REPO}} -b ${{env.MY_BRANCH}} tmp
+        cd tmp
+        git config user.name "Automerge Bot"
+        git config user.email "bot@example.com"
+        git config pull.rebase false
+        git pull ${{env.MASTER_REPO}} ${{env.MAIN_BRANCH}}
+        git push
