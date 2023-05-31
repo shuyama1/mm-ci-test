@@ -1,11 +1,10 @@
 name: Feature branch auto merge
 
 on:
-  workflow_dispatch:
-  schedule:
-    # You can setup schedule here
-    - cron: '0 0 * * *'
-
+  push:
+    branches:
+      - main  # Set a branch to deploy
+      
 env:
 
   MY_REPO: https://shuyama1:${{secrets.GITHUB_TOKEN}}@github.com/shuyama1/mm-ci-test.git
