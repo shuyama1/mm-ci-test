@@ -1,7 +1,6 @@
 name: Feature branch auto merge
 
-permissions:
-  contents: write
+permissions: read-all
 
 on:
   push:
@@ -14,21 +13,24 @@ env:
 
   MY_BRANCH: feature-branch-test-branch
 
-  MASTER_REPO: https://github.com/shuyama1/mm-ci-test.git
+  MAIN_REPO: https://github.com/shuyama1/mm-ci-test.git
 
   MAIN_BRANCH: main
 
 jobs:
   merge:
     runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
 
     steps:
-    - name: Merge with master
+    - name: Merge with main
       run: |
         git clone ${{env.MY_REPO}} -b ${{env.MY_BRANCH}} tmp
         cd tmp
         git config user.name "Automerge Bot"
         git config user.email "bot@example.com"
         git config pull.rebase false
-        git pull ${{env.MASTER_REPO}} ${{env.MAIN_BRANCH}}
+        git pull ${{env.MAIN_REPO}} ${{env.MAIN_BRANCH}}
         git push
