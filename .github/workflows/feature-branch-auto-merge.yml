@@ -31,8 +31,5 @@ jobs:
         cd tmp
         git config user.name "Automerge Bot"
         git config user.email "bot@example.com"
-        git checkout main
-        git pull
-        git checkout ${{env.FEATURE_BRANCH}}
-        git merge main
+        git merge origin/main
         git push
