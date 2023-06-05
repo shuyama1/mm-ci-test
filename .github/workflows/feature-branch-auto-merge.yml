@@ -9,7 +9,7 @@ on:
       
 env:
 
-#   MY_REPO: https://shuyama1:${{secrets.GITHUB_TOKEN}}@github.com/shuyama1/mm-ci-test.git
+  REPO: https://shuyama1:${{secrets.GITHUB_TOKEN}}@github.com/shuyama1/mm-ci-test.git
 
   FEATURE_BRANCH: feature-branch-test-branch-2
 
@@ -27,6 +27,8 @@ jobs:
     steps:
     - name: Merge with main
       run: |
+        git clone ${{env.REPO}} -b ${{env.FEATURE_BRANCH}} tmp
+        cd tmp
         git config user.name "Automerge Bot"
         git config user.email "bot@example.com"
         git checkout main
