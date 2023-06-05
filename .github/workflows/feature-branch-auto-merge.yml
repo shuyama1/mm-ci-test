@@ -31,6 +31,6 @@ jobs:
         cd tmp
         git config user.name "Automerge Bot"
         git config user.email "bot@example.com"
-        git merge origin/main
+        git merge main
         git push
 
