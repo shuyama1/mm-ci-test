@@ -7,6 +7,10 @@ on:
     branches:
       - main  # Set a branch to deploy
       
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+      
 env:
 
   REPO: https://shuyama1:${{secrets.GITHUB_TOKEN}}@github.com/shuyama1/mm-ci-test.git
