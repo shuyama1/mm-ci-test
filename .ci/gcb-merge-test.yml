@@ -1,0 +1,11 @@
+---
+steps:
+    - name: 'gcr.io/cloud-builders/git'
+      id: test-checker
+      env:
+         - BRANCH_NAME=$_BRANCH_NAME
+      entrypoint: 'bash'
+      args:
+          - -c
+          - echo $_BRANCH_NAME
+#           - git push https://modular-magician:$$GITHUB_TOKEN@github.com/GoogleCloudPlatform/magic-modules $COMMIT_SHA:tgc-sync
