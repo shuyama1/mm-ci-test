@@ -19,3 +19,5 @@ test3
 test
 
 This is to test generate-downstream
+
+tests test
