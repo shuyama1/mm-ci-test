@@ -8,4 +8,6 @@ steps:
       args:
           - -c
           - echo "test"
+          - echo $BRANCH_NAME
+          - echo "end"
 #           - git push https://modular-magician:$$GITHUB_TOKEN@github.com/GoogleCloudPlatform/magic-modules $COMMIT_SHA:tgc-sync
