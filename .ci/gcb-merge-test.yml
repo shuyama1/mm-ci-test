@@ -2,8 +2,8 @@
 steps:
     - name: 'gcr.io/cloud-builders/git'
       id: test-checker
-      env:
-         - BRANCH_NAME=$_BRANCH_NAME
+      # env:
+      #    - BRANCH_NAME=$_BRANCH_NAME
       entrypoint: 'bash'
       args:
           - -c
