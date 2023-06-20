@@ -7,5 +7,5 @@ steps:
       entrypoint: 'bash'
       args:
           - -c
-          - echo "BRANCH_NAME: "
+          - echo "test"
 #           - git push https://modular-magician:$$GITHUB_TOKEN@github.com/GoogleCloudPlatform/magic-modules $COMMIT_SHA:tgc-sync
