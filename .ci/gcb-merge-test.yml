@@ -2,12 +2,23 @@
 steps:
     - name: 'gcr.io/cloud-builders/git'
       id: test-checker
+      secretEnv: ["GITHUB_TOKEN"]
       # env:
       #    - BRANCH_NAME=$_BRANCH_NAME
       entrypoint: 'bash'
       args:
           - -c
-          - echo "test"
-          - echo $BRANCH_NAME
-          - echo "end"
-#           - git push https://modular-magician:$$GITHUB_TOKEN@github.com/GoogleCloudPlatform/magic-modules $COMMIT_SHA:tgc-sync
+          - |
+            echo "test"
+            echo $BRANCH_NAME
+            echo "end"
+            if [ "$BRANCH_NAME" == "main" ]; then
+              git push https://shuyama1:$$GITHUB_TOKEN@github.com//shuyama1/mm-ci-test $COMMIT_SHA:tpg-sync
+            else 
+              git push https://shuyama1:$$GITHUB_TOKEN@github.com//shuyama1/mm-ci-test $COMMIT_SHA:FEATURE-BRANCH-$$BRANCH_NAME-tpg-sync
+            fi
+            
+availableSecrets:
+  secretManager:
+    - versionName: projects/53725150431/secrets/shuyama1_github_token/versions/latest
+      env: GITHUB_TOKEN
