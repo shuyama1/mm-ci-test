@@ -21,4 +21,4 @@ jobs:
       - uses: actions/checkout@v3
       - name: pull-request
         run: |
-          gh pr create --head main --base FEATURE-BRANCH-testing2 --title "Merge main branch" --body "This is for testing"
+          gh pr create --head main --base FEATURE-BRANCH-testing --title "Merge main branch" --body "This is for testing"
