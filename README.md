@@ -1,5 +1,7 @@
 # This is used to test some ci ideas (testing 6)
 
+add a new line
+
 test1
 
 test
