@@ -6,8 +6,13 @@ Added a new line from main
 
 Added another new line from main
 
+third line from feature
+
 second line
 
 line from feature branch
 
 third line
+
+second line from feature
+
