@@ -11,3 +11,5 @@ second line
 line from feature branch
 
 third line
+
+second line from feature
