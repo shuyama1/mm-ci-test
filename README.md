@@ -1,5 +1,7 @@
 This is to test some ci ideas
 
+This line is from test rebase
+
 major branch line
 
 Added a new line from main
