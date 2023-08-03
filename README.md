@@ -2,6 +2,8 @@ This is to test some ci ideas
 
 This line is from test rebase
 
+second line is from test rebase (added after main addition)
+
 major branch line
 
 Added a new line from main
