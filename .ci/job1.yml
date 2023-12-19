@@ -3,3 +3,4 @@ steps:
   script: |
     #!/usr/bin/env bash
     echo "First Job"
+    echo "extra line"
