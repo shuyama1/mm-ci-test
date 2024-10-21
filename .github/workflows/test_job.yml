@@ -21,6 +21,9 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
     - name: Print out values
+      with:
+        since: ${{ inputs.since || '1973-01-01' }}
+        dry_run: ${{ contains(inputs.dry_run, 'true') }}
       run: |
         #!/usr/bin/env bash
         echo "Print out input values"
