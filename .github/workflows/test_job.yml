@@ -14,7 +14,7 @@ on:
         description: "Dry run (no changes will be made to issues)"
         type: boolean
   schedule:
-        - cron: '0 7 * * *' # UTC 7AM (-7)-> 12AM PST
+        - cron: '*/5 * * * *' # every 5 min
 
 jobs:
   test-job:
