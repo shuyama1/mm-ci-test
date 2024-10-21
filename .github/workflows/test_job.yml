@@ -14,7 +14,7 @@ on:
         description: "Dry run (no changes will be made to issues)"
         type: boolean
   schedule:
-        - cron: '*/5 * * * *' # every 5 min
+        - cron: '*/30 * * * *' # every 30 min
 
 jobs:
   test-job:
