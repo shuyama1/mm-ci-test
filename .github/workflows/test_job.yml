@@ -19,9 +19,9 @@ on:
 jobs:
   test-job:
     steps:
-- name: bash
-  script: |
-    #!/usr/bin/env bash
-    echo "Print out input values"
-    echo "${{inputs.since}}"
-    echo "${{inputs.dry_run}}"
+    - name: bash
+      script: |
+        #!/usr/bin/env bash
+        echo "Print out input values"
+        echo "${{inputs.since}}"
+        echo "${{inputs.dry_run}}"
