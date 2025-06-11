@@ -1,0 +1,29 @@
+name: Test Input Values for Schedule GHA Job
+
+permissions:
+  issues: write
+
+on:
+  workflow_dispatch:
+    inputs:
+      since:
+        description: "The date to backfill tickets since in YYYY-MM-DD format"
+        required: true
+        default: '1973-01-01'
+      dry_run:
+        description: "Dry run (no changes will be made to issues)"
+        type: boolean
+
+jobs:
+  test-job:
+    runs-on: ubuntu-22.04
+    steps:
+    - name: Print out values
+      env:
+        since: ${{ inputs.since || '1973-01-01' }}
+        dry_run: ${{ contains(inputs.dry_run, 'true') }}
+      run: |
+        #!/usr/bin/env bash
+        echo "Print out input values"
+        echo "${{env.since}}"
+        echo "${{env.dry_run}}"
